@@ -17,29 +17,32 @@ if (isset($_GET["product"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bonjour</title>
     <?php require_once __DIR__ . '/../src/partials/head_css.php'; ?>
+    <link rel="stylesheet" href="/product.css">
 </head>
 
 <body>
     <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
     <?php require_once __DIR__ . '/../src/partials/show_error.php'; ?>
     <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1><?php echo $infos_product["name"] ?></h1>
-                <p>Catégorie <?php echo $infos_product["category"] ?></p>
-                <p><i><?php echo $infos_product["description"] ?></i></p>
-                <h6><?php echo $infos_product["price"] ?>€</h6>
-                <br><br>
+    <div class="row">
+        <div class="col">
+            <div class="product-box">
+            <h1><?php echo $infos_product["name"] ?></h1>
+            <p>Catégorie <?php echo $infos_product["category"] ?></p>
+            <p><i><?php echo $infos_product["description"] ?></i></p>
+            <h6><?php echo $infos_product["price"] ?>€</h6>
+            <br><br>
+            <div class="comment-box">
                 <h1>Commentaires et avis :</h1>
                 <?php if (isset($infos_product["rating"])) { ?>
                     <p><?php echo $infos_product["username"]." : ".  $infos_product["date"] ?></p>
                     <p><?php echo "Note: " . $infos_product["rating"] . '/5' ?></p>
                     <p><?php echo $infos_product["commentary"] ?></p>
                 <?php } ?>
-
             </div>
         </div>
     </div>
+</div>
 
 
 </body>
