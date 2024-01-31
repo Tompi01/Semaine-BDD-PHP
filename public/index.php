@@ -5,6 +5,10 @@ if(!isset($_POST['search'])){
     $_POST['search'] = "";
 
 }
+if(!isset($_POST['filter'])){
+    $_POST['filter'] = "";
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,18 +34,24 @@ if(!isset($_POST['search'])){
         </div>
     </div>
 
-    <form action="search.php" method="post">
+    <form  action="search.php" method="post">
         <div>
             <input type="text" name="search" id="search" placeholder="Entrez le nom du produit">
-            <input type="submit" name="filter" id="filter" value="Rechercher" href="">
+            <select name="filter" id="filter">
+                <option value="">Pas de filtre </option>
+                <option value="a4">A4</option>
+                <option value="a3">A3</option>
+                <option value="a2">A2</option>
+            </select>
+            <input type="submit" name="submit" id="submit" value="Rechercher" href="">
         </div>
     </form>
     <?php
-        if ($_POST['search'] == "") {
+        if ($_POST['search'] == "" && $_POST['filter'] == "") {
             echo displayAllProduct();
         }
         else{
-           echo displaySearchedProduct();
+           echo displaySearchedProduct($_POST['filter']);
         }
     ?>
 
