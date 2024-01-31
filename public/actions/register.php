@@ -42,10 +42,15 @@ if ($alreadyExists != false) {
 }
 
 // INSERT
-$st2 = $pdo->prepare('INSERT INTO users(email, password, username) VALUES(?, ?, ?)');
-$st2->execute([$_POST['email'], $password, $_POST['username']]);
+$admin = 'user';
+$st2 = $pdo->prepare('INSERT INTO users(email, password, username, role) VALUES(?, ?, ?, ?)');
+$st2->execute([$_POST['email'], $password, $_POST['username'], $admin]);
 
 // recup id utilisateur
 $_SESSION['user_id'] = $pdo->lastInsertId(); // connecté pour plus tard
+header("Location: /index.php");
 
-header('Location: /register.php?success=1'); // $_GET['success']
+// if(isset($_SESSION['user_id']) != NULL){
+// header("Location: /index.php");
+// die();
+// }

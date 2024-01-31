@@ -1,5 +1,8 @@
 <?php 
 require_once __DIR__ . '/../src/init.php';
+if($_SESSION['user_id']){
+    header("Location: /index.php");
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +31,10 @@ require_once __DIR__ . '/../src/init.php';
         <div>
             <label for="username">Username:</label>
             <input type="username" name="username" id="username">
+        </div>
+        <div>
+            <label for="isadmin">Is admin ?</label>
+            <input type="checkbox" name="isadmin" id="isadmin">
         </div>
         <div>
             <button type="submit">Register NOW!</button>
