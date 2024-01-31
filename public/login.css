@@ -263,7 +263,7 @@ Par défaut, l'élément créé est de type en-ligne (inline)*/
     opacity: 0.8;
 }
 
-.error {
+.error_message {
     background: #F2DEDE;
     color: #A94442;
     padding: 10px;
