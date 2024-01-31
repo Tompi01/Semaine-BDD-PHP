@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . '/../src/init.php';
-if($_SESSION['user_id']){
+if(isset($_SESSION['user_id'])){
     header("Location: /index.php");
 };
 ?>

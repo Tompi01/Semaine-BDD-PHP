@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/search.php';
+if(!isset($_POST['search'])){
+    $_POST['search'] = "";
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,27 +33,17 @@ require_once __DIR__ . '/actions/search.php';
     <form action="search.php" method="post">
         <div>
             <input type="text" name="search" id="search" placeholder="Entrez le nom du produit">
-            <input type="button" name="filter" id="filter" value="Rechercher" href="">
+            <input type="submit" name="filter" id="filter" value="Rechercher" href="">
         </div>
     </form>
     <?php
-
-    $select = $pdo->prepare('SELECT * FROM product');
-    $select->execute();
-    $info_login = $select->fetchAll();
-
-    foreach ($info_login as $key) : ?>
-
-        <form action="product.php" method="post">
-            <p>
-                <?php echo $key["name"]; ?> | Categorie: <?php echo $key["category"]; ?> (<?php echo $key["price"]; ?>€) <br><?php echo $key["description"]; ?> <br>Stock disponible : <?php echo $key["stock"]; ?>
-            </p>
-            <div>
-                <input type="button" name="button" id="button" value="Aller sur le produit">
-            </div>
-        </form>
-        <br>
-    <?php endforeach; ?>
+        if ($_POST['search'] == "") {
+            echo displayAllProduct();
+        }
+        else{
+           echo displaySearchedProduct();
+        }
+    ?>
 
 
 </body>
