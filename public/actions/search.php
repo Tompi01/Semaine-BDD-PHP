@@ -10,7 +10,7 @@ function displaySearchedProduct($filter)
     $display = "";
     foreach ($search_result as $key) :
         $display .= '<p>';
-        $display .=  '<a href="/product.php">'.$key['name'] .'| Categorie:'.$key["category"] ." ". $key["price"] . '€ <br>' . $key["description"] . '<br>Stock disponible : '. $key["stock"] .'</a>';
+        $display .=  '<a href="/product.php?product='.$key["id"].'">'.$key['name'] .'| Categorie:'.$key["category"] ." ". $key["price"] . '€ <br>' . $key["description"] . '<br>Stock disponible : '. $key["stock"] .'</a>';
         $display .= '</p>';
         $display .= '<br>';
     endforeach;
