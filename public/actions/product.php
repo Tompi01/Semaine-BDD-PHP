@@ -10,7 +10,7 @@ function get_product_infos()
         LEFT JOIN users on commentaries.id_user = users.id 
         WHERE product.id = :id');
     $select->execute([":id" => $_GET["product"]]);
-    $info_product = $select->fetch();
+    $info_product = $select->fetchAll();
     //var_dump($info_product);
     return $info_product;
 }

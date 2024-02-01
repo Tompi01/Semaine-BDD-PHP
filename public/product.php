@@ -49,18 +49,28 @@ if (isset($_GET["product"])) {
             </form>
 
             <div class="product-box">
-            <h1><?php echo $infos_product["name"] ?></h1>
-            <p>Catégorie <?php echo $infos_product["category"] ?></p>
-            <p><i><?php echo $infos_product["description"] ?></i></p>
-            <h6><?php echo $infos_product["price"] ?>€</h6>
+            <h1><?php echo $infos_product[0]["name"] ?></h1>
+            <p>Catégorie <?php echo $infos_product[0]["category"] ?></p>
+            <p><i><?php echo $infos_product[0]["description"] ?></i></p>
+            <h6><?php echo $infos_product[0]["price"] ?>€</h6>
             <br><br>
             <div class="comment-box">
                 <h1>Commentaires et avis :</h1>
-                <?php if (isset($infos_product["rating"])) { ?>
-                    <p><?php echo $infos_product["username"]." : ".  $infos_product["date"] ?></p>
-                    <p><?php echo "Note: " . $infos_product["rating"] . '/5' ?></p>
-                    <p><?php echo $infos_product["commentary"] ?></p>
-                <?php } ?>
+                <?php foreach($infos_product as $commentary):?>
+                    <?php if (isset($commentary["rating"])) { ?>
+                        <div class="commentary">
+                            <div class="commentary_infos">
+                                <?php $newDate = "Le ".date("j M Y", strtotime($commentary["date"]));?>
+                                <p><?php echo "<b>".$commentary["username"]."</b> : ".  $newDate ?></p>
+                                <p><?php echo "Note: " . $commentary["rating"] . '/5' ?></p>
+                            </div>
+                            <div class="commentary_text">
+                                <marquee direction="right" scrollamount="10"><?php echo $commentary["commentary"] ?></marquee>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <br>
+                <?php endforeach;?>
             </div>
         </div>
     </div>
