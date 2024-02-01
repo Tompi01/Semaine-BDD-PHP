@@ -53,6 +53,7 @@ require_once __DIR__ . '/../../src/init.php';
         $_SESSION["username"] = $info_login['username'];
         $_SESSION["email"] = $info_login['email'];
         $_SESSION["role"] = $info_login['role'];
+
         header("Location: /index.php");
         die();
     }
