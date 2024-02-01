@@ -14,8 +14,11 @@
     <li>
         <a href="/actions/logout.php">Se déconnecter</a>
     </li>
-    <?php } ?>
     <li>
         <a href="/order_list.php">Liste de commandes</a>
     </li>
+    <li>
+        <a href="/lapanier.php">Panier</a>
+    </li>
+    <?php } ?>
 </ul>

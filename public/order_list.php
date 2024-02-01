@@ -80,7 +80,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
                     <?php endif; ?>
                     <ul>
                         <li>
-                            <p><?php echo $compo["quantity"] . " " . $compo["name"] . " | " . $compo["price"] . "€" . $compo["delivery_date"]; ?></p>
+                            <p><?php echo $compo["quantity"] . " " . $compo["name"] . " | " . $compo["price"] . "€" . $compo["delivery_address"]; ?></p>
                         </li>
 
                     </ul>

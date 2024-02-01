@@ -42,6 +42,12 @@ if (isset($_GET["product"])) {
     <div class="container">
     <div class="row">
         <div class="col">
+
+            <form action="/actions/add_to_basket.php?product=<?php echo $_GET["product"]?> "method='post'>
+                <input type="number" name="number" min="1" placeholder="Quantité voulue">
+                <input type="submit" name="submit" value="Ajouter au panier">
+            </form>
+
             <div class="product-box">
             <h1><?php echo $infos_product["name"] ?></h1>
             <p>Catégorie <?php echo $infos_product["category"] ?></p>
