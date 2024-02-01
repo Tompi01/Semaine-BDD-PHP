@@ -48,6 +48,9 @@ $st2->execute([$_POST['email'], $password, $_POST['username'], $admin]);
 
 // recup id utilisateur
 $_SESSION['user_id'] = $pdo->lastInsertId(); // connecté pour plus tard
+$_SESSION["username"] = $_POST['username'];
+$_SESSION["email"] = $_POST['email'];
+$_SESSION["role"] = $admin;
 header("Location: /index.php");
 
 // if(isset($_SESSION['user_id']) != NULL){

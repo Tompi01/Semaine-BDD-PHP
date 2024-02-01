@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/product.php';
+var_dump($_SESSION);
 if (isset($_GET["product"])) {
     $infos_product = get_product_infos();
     
@@ -23,6 +24,21 @@ if (isset($_GET["product"])) {
 <body>
     <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
     <?php require_once __DIR__ . '/../src/partials/show_error.php'; ?>
+
+    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
+    <form action="/actions/modify_product.php?product=<?php echo $_GET["product"]?>" method="post">
+        <div>
+            <button>Modifier le produit</button>
+        </div>
+    </form>
+
+    <form action="/actions/delete_product.php?product=<?php echo $_GET["product"]?>" method="post">
+        <div>
+            <button>Supprimer le produit</button>
+        </div>
+    </form>
+    <?php endif; ?>
+
     <div class="container">
     <div class="row">
         <div class="col">
