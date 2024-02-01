@@ -27,19 +27,19 @@ if (!isset($_SESSION['role'])) {
     <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
     <?php require_once __DIR__ . '/../src/partials/show_error.php'; ?>
     <div class="container">
-    <div class="row">
-        <div class="col">
-            <h1>Bonjour</h1>
-            <div class="alert alert-success">
-                Bienvenue sur la boutique !
+        <div class="row">
+            <div class="col">
+                <h1>Bonjour</h1>
+                <div class="alert alert-success">
+                    Bienvenue sur la boutique !
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-                  
-  <form class="search-bar" action="search.php" method="post">
+
+    <form class="search-bar" action="search.php" method="post">
         <div>
             <input type="text" name="search" id="search" placeholder="Entrez le nom du produit">
             <select name="filter" id="filter">
@@ -51,15 +51,22 @@ if (!isset($_SESSION['role'])) {
             <input type="submit" name="submit" id="submit" value="Rechercher" href="">
         </div>
     </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <?php
+                if ($_POST['search'] == "" && $_POST['filter'] == "") {
+                    echo '<div class="product-box">' . displayAllProduct() . '</div>';
+                } else {
+                    echo '<div class="product-box">' . displaySearchedProduct($_POST['filter']) . '</div>';
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+
     <?php
-    if ($_POST['search'] == "" && $_POST['filter'] == "") {
-        echo displayAllProduct();
-    } else {
-        echo displaySearchedProduct($_POST['filter']);
-    }
-
-
-
     if ($_SESSION['role'] == 'admin') { ?>
         <form action="newproduct.php" method="post">
             <input type="text" name="name" required="required" placeholder="Entrez le nom du produit">
