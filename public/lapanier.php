@@ -21,7 +21,7 @@ $product_cart = get_display_lapanier();
     <!--  mettre le code ici -->
     <ul>
         <?php foreach ($product_cart as $product) : ?> </p>
-            <li><p><?php echo "<b>".$product["product_number"]."x</b> ".$product["name"]." (".$product["price"]."€)" ?> </p></li>
+            <li><p><?php echo "<b>".$product["product_number"]."x</b> ".$product["name"]." (".$product["price"]*$product["product_number"]."€)" ?> </p></li>
         <?php endforeach; ?> </p>
     </ul>
     <form action="/actions/validate_order.php" method="post">
