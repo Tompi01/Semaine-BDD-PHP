@@ -5,10 +5,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
     // On prends les commandes dans une variable donc admin
 } else {
     $info_orders = get_user_orders();
-    
+
     // On prends les commandes dans une variable donc user
 }
-var_dump($info_orders[0]);?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,20 +26,21 @@ var_dump($info_orders[0]);?>
         <div class="row">
             <div class="col">
                 <h1>Liste de commandes</h1>
-                <?php $i = 0 ;
-                $total_price =0 ;?>
-                <?php foreach($info_orders as $compo):?>
-                    <?php if ($i != $compo["id_order"]):?>
-                        <h3>Commande n°<?php echo $compo["id_order"]." Date de commande: ".$compo["order_date"];?></h3>
-                    <?php $i = $compo["id_order"]?>
-                    <?php endif;?>
-                    <p><?php echo $compo["quantity"]." ".$compo["name"]." | ".$compo["price"]."€".$compo["delivery_date"];?></p>
-                   <?php $O = floatval($compo["price"]) ;
-                  echo $total_price += $O ;?>
-                <?php endforeach;?>
+                <?php $i = 0;
+                $final_price = 0; ?>
+                <?php foreach ($info_orders as $compo) : ?>
+                    <?php if ($i != $compo["id_order"]) :
+                        $total_price = total_price($compo['id_order']);?>
+                        <h3>Commande n°<?php echo $compo["id_order"] . " Date de commande: " . $compo["order_date"] . " Prix Total:" . $total_price[0][0] . "€"; ?></h3>
+                        <?php $i = $compo["id_order"] ?>
+                    <?php endif; ?>
+                    <p><?php echo $compo["quantity"] . " " . $compo["name"] . " | " . $compo["price"] . "€" . $compo["delivery_date"] . " " . $compo["status"]; ?></p>
+
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
-            
+
 </body>
+
 </html>

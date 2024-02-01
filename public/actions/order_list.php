@@ -28,3 +28,17 @@ function get_order_composition($order_id)
 
     return $info_composition;
 }
+
+function total_price($order_id){
+    global $pdo;
+    
+    $select = $pdo->prepare('SELECT SUM(product.price) FROM orders
+    INNER JOIN composition ON orders.id = composition.id_order
+    INNER  JOIN product ON product.id = composition.id_product
+    WHERE id_order = :id_order');
+    $select->execute([":id_order" => $order_id]);
+    $total_price = $select->fetchAll();
+
+    return $total_price;
+
+}
