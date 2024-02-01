@@ -55,9 +55,11 @@ require_once __DIR__ . '/../../src/init.php';
         header("Location: /index.php");
         die();
     }
-    
-    
-    
+    else{
+        header("Location: /login.php?eror =email user incorrect");
+        $_SESSION['error_message'] = 'email ou mot de passe incorrect ';
+    }
+   
     
     
     

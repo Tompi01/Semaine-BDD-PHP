@@ -1,0 +1,53 @@
+/* styles.css */
+
+/* Boîtes de produits */
+
+body{
+    background: #23242a;
+}
+.product-box {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.product-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-box a {
+    text-decoration: none;
+    color: #333;
+}
+
+.product-box p {
+    margin: 0;
+}
+
+.product-box .price {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Boîtes de commentaires */
+.comment-box {
+    background-color: #38b6ff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.comment-box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-box p {
+    margin: 0;
+}
