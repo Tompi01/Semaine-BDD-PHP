@@ -1,11 +1,5 @@
 <?php
 
-// Redirects the user to the home page if he doesn't have the get method.
-if (isset($_SESSION["user_id"])) {
-    header("Location: /index.php");
-    die();
-}
-
 // Manage price
 if (isset($_POST['price'])) {
     $_POST['price']= floatval($_POST['price']);
