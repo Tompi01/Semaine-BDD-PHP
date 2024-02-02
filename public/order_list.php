@@ -5,15 +5,30 @@ if (!isset($_POST["search_status"])) {
     $_POST["search_status"] = "all";
 }
 if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
-    var_dump($_POST["search_status"]);
+    //var_dump($_POST["search_status"]);
     // On prends les commandes dans une variable donc admin
+
     if (!isset($_POST["search_status"])) {
         // Si y'a pas de filtre sélectionné
-        $info_orders = get_admin_orders("all");
+        $info_orders = get_admin_orders_status("all");
     } else {
         // Si y'a un filtre sélectionné
-        $info_orders = get_admin_orders($_POST["search_status"]);
+        $info_orders = get_admin_orders_status($_POST["search_status"]);
     }
+
+    if (!isset($_POST["date_modif"])) {
+        // Si y'a pas de filtre sélectionné
+        sort($info_orders);
+    } else {
+        // Si y'a un filtre sélectionné
+        if($_POST['date_modif'] == "recently")
+        {
+            sort($info_orders);
+        } else {
+            rsort($info_orders);
+        }
+    }
+
 } else {
     $info_orders = get_user_orders();
 
@@ -47,6 +62,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
                         <option value="Livrée">Livré</option>
                         <option value="Annulée">Annulé</option>
                     </select>
+                    <select name="date_modif" id="date_modif">
+                        <option value="recently">Du plus récent au plus ancien</option>
+                        <option value="ancien">Du plus ancien au plus récent</option>
+                    </select>
                     <input type="submit" name="submit" value="Trier" href="">
                 </form>
                 <?php endif; ?>
@@ -58,7 +77,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
                     <?php if ($i != $compo["id_order"]) :
                         $total_price = total_price($compo['id_order']); ?>
                         <marquee>Commande n°<?php echo $compo["id_order"] ?></marquee>
-                        <h6><?php echo "Date de commande: <b>" . $compo["order_date"] . "</b> | Prix Total : <b>" . $total_price[0][0] . "€</b>"; ?></h6>
+                        <h6><?php echo "Date de commande: <b>" . $compo["update_date"] . "</b> | Prix Total : <b>" . $total_price[0][0] . "€</b>"; ?></h6>
                         <?php $i = $compo["id_order"] ?>
                         <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
                             <h6>Commandé par <b><?php echo $compo["username"] ?></b></h6>
@@ -88,6 +107,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
 
 
                 <?php endforeach; ?>
+                
             </div>
         </div>
     </div>

@@ -15,7 +15,7 @@ function get_user_orders()
     return $info_orders;
 }
 
-function get_admin_orders($search_category)
+function get_admin_orders_status($search_category)
 {
     global $pdo;
 
@@ -36,6 +36,31 @@ function get_admin_orders($search_category)
         $select->execute([':status' => $search_category]);
         $info_orders = $select->fetchAll();
         return $info_orders;
+    }
+}
+
+
+function get_admin_orders_date($search_date)
+{
+    global $pdo;
+    if ($search_date == "recently") { // Si on recherche tout
+        $select = $pdo->prepare('SELECT * FROM orders
+        INNER JOIN composition ON orders.id = composition.id_order
+        INNER JOIN product ON product.id = composition.id_product
+        INNER JOIN users ON users.id = orders.id_user
+        ORDER BY orders.update_date DESC');
+        $select->execute();
+        $info_date = $select->fetchAll();
+        return $info_date;
+    } else { // Si on recherche un status
+        $select = $pdo->prepare('SELECT * FROM orders
+        INNER JOIN composition ON orders.id = composition.id_order
+        INNER JOIN product ON product.id = composition.id_product
+        INNER JOIN users ON users.id = orders.id_user
+        ORDER BY orders.update_date ASC');
+        $select->execute();
+        $info_date = $select->fetchAll();
+        return $info_date;
     }
 }
 
