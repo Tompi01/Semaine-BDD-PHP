@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/display_lapanier.php';
+
+// Retrieves cart information from variable
 $product_cart = get_display_lapanier();
 
 ?>
@@ -18,7 +20,6 @@ $product_cart = get_display_lapanier();
 
     <h1>Panier</h1>
     <h3>Votre panier-piano</h3>
-    <!--  mettre le code ici -->
     <ul>
         <?php foreach ($product_cart as $product) : ?> </p>
             <li><p><?php echo "<b>".$product["product_number"]."x</b> ".$product["name"]." (".$product["price"]*$product["product_number"]."€)" ?> </p></li>

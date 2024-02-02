@@ -1,13 +1,14 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/product.php';
-var_dump($_SESSION);
+
+// If the product method is available, then the info is retrieved, otherwise it is redirected to the home page.
 if (isset($_GET["product"])) {
     $infos_product = get_product_infos();
     
 } else {
-    header('Location: /index.php'); // redirige utilisateur
-    die(); // stop execution du script
+    header('Location: /index.php');
+    die();
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +26,8 @@ if (isset($_GET["product"])) {
     <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
     <?php require_once __DIR__ . '/../src/partials/show_error.php'; ?>
 
-    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): ?>
+    
+    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): // If you're an admin ?>
     <form action="/actions/modify_product.php?product=<?php echo $_GET["product"]?>" method="post">
         <div>
             <button>Modifier le produit</button>

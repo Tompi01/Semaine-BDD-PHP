@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/search.php';
 require_once __DIR__ . '/actions/newproduct.php';
+
+// Define methods well if they are not present to avoid problems
 if (!isset($_POST['search'])) {
     $_POST['search'] = "";
 }

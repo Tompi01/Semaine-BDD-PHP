@@ -1,5 +1,7 @@
 <?php 
 require_once __DIR__ . '/../src/init.php';
+
+// If user is already logged in, redirect to home page
 if(isset($_SESSION['user_id'])){
     header("Location: /index.php");
 };
