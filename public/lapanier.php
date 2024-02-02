@@ -2,6 +2,12 @@
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/display_lapanier.php';
 
+// Redirects the user to the home page if he doesn't have the get method.
+if (!isset($_SESSION["user_id"])) {
+    header("Location: /index.php");
+    die();
+}
+
 // Retrieves cart information from variable
 $product_cart = get_display_lapanier();
 

@@ -3,6 +3,12 @@ require_once __DIR__ . '/../../src/init.php';
 
 require_once __DIR__ . '/product.php';
 
+// Redirects the user to the home page if he doesn't have the get method.
+if (isset($_SESSION["user_id"])) {
+    header("Location: /index.php");
+    die();
+}
+
 // If product id is present on URL, get product info
 if (isset($_GET["product"])) {
     $infos_product = get_product_infos();
