@@ -5,13 +5,16 @@
 body{
     background: #23242a;
 }
+
 .product-box {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
+    margin-top: 90px;
     margin-bottom: 20px;
     transition: transform 0.3s ease;
+    text-align: center; /* Pour centrer les éléments horizontalement */
 }
 
 .product-box:hover {
@@ -51,3 +54,129 @@ body{
 .comment-box p {
     margin: 0;
 }
+
+
+.commentary {
+    background-color: rgb(168, 213, 255);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+.commentary_text {
+    background-color: rgb(223, 239, 255);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.commentary_infos {
+    display: flex;
+    justify-content:space-between;
+}
+
+.comment-box form {
+    margin-top: 20px;
+}
+
+.comment-box input[type="text"],
+.comment-box input[type="submit"] {
+    padding: 10px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    margin: 5px; /* Espacement entre les éléments */
+    
+}
+.comment-box input[type="text"] {
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.comment-box input[type="text"]:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.comment-box input[type="submit"] {
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-box input[type="submit"]:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Styles pour les boutons de modification et suppression */
+
+.modifsuppr,
+.modifsuppr1 {
+
+    display:inline-flexbox; /* Pour afficher les boutons côte à côte */
+    transition: transform 0.3s ease; /* Animation de transformation */
+    margin-left: 1200px;
+    margin-bottom: 5px;
+}
+
+.modifsuppr button,
+.modifsuppr1 button {
+    padding: 10px 10px;
+    
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.modifsuppr button {
+    padding-right: 22px;
+}
+
+.modifsuppr button:hover,
+.modifsuppr1 button:hover {
+    background-color: #4caf50; /* Vert pour modifsuppr */
+    color: white;
+}
+
+.modifsuppr1 button {
+    background-color: #f44336; /* Rouge pour modifsuppr1 */
+    color: white;
+}
+
+.modifsuppr1 button:hover {
+    background-color: #cc0000; /* Rouge plus foncé au survol */
+}
+.ajoutpanier {
+    position: fixed; /* Position fixe pour rester en haut */
+    top: 60px; /* Distance du haut de la page */
+    left: 15%; /* Centre horizontalement */
+    transform: translateX(-50%); /* Pour centrer horizontalement */
+    background-color: #423b3b; /* Couleur de fond */
+    padding: 15px 30px; /* Espacement intérieur */
+    border-radius: 30px; /* Bordure arrondie */
+    color: #bc0505; /* Couleur du texte */
+    font-size: 18px; /* Taille de police */
+    cursor: pointer; /* Curseur pointer au survol */
+    transition: background-color 0.3s ease; /* Animation de transition */
+    z-index: 999; /* Pour s'assurer que le bouton est au-dessus de tout */
+}
+
+.ajoutpanier:hover {
+    background-color: #ffffff; /* Changement de couleur au survol */
+}
+.ajoutpanier input[type="submit"]{
+    background-color: #000000;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 6%;
+}
+.ajoutpanier input[type="number"]{
+    background-color: #000000;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 6%;
+}
+

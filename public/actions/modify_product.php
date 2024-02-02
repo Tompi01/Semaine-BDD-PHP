@@ -2,10 +2,19 @@
 require_once __DIR__ . '/../../src/init.php';
 
 require_once __DIR__ . '/product.php';
+
+// Redirects the user to the home page if he doesn't have the get method.
+if (!isset($_SESSION["user_id"])) {
+    header("Location: /index.php");
+    die();
+}
+
+// If product id is present on URL, get product info
 if (isset($_GET["product"])) {
     $infos_product = get_product_infos();
 }
 
+// If the product modification is successful, then modify the product on the DB with the SQL query and redirect the user to the product page
 if (isset($_GET["sucess"])) {
     if ($_GET["sucess"] == 1) {
         global $pdo;
@@ -19,12 +28,6 @@ if (isset($_GET["sucess"])) {
     }
 }
 
-
-//global $pdo;
-//$select = $pdo->prepare('DELETE FROM product WHERE id = :id');
-//$select->execute([':id' => $_GET['product']]);
-//header("Location: /index.php");
-//die();
 ?>
 <!DOCTYPE html>
 <html lang="en">
