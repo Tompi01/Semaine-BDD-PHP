@@ -4,6 +4,11 @@ require_once __DIR__ . '/../../src/init.php';
 
 function get_display_lapanier()
 {
+    /**
+    * Function that retrieves all basket information
+    * Return: the $display_lapanier variable, which contains cart informations.
+    */
+
     global $pdo;
     $select = $pdo->prepare('SELECT * FROM cart
     INNER JOIN product ON product.id = cart.id_product

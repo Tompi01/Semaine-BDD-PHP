@@ -1,4 +1,6 @@
 <?php
+
+// Manage price
 if (isset($_POST['price'])) {
     $_POST['price']= floatval($_POST['price']);
     if (!is_double($_POST['price'])) {
@@ -6,6 +8,8 @@ if (isset($_POST['price'])) {
         die(); // stop execution du script
     }
 }
+
+// Manage inventory
 if (isset($_POST['stock'])) {
     $_POST['stock']= intval($_POST['stock'],$base = 10);
     if (!is_int($_POST['stock'])) {
@@ -13,6 +17,8 @@ if (isset($_POST['stock'])) {
         die(); // stop execution du script
     }
 }
+
+// Inserts all information if all is ok
 if (isset($_POST['name'])) {
     $st2 = $pdo->prepare('INSERT INTO product(name, price, description, category,stock) VALUES(?, ?, ?, ?,?)');
     $st2->execute([$_POST['name'], $_POST['price'], $_POST['description'], $_POST['category'], $_POST['stock']]);
