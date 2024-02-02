@@ -12,9 +12,11 @@ if (!isset($_GET['product'])) {
     header('Location: /product.php?' . $_GET['product']);
     die();
 }
-// Insert the product into the shopping cart using an SQL query
 
+// Delete the product in the cart into the shopping cart using an SQL query
 global $pdo;
-$select = $pdo->prepare('INSERT INTO cart(id_user, id_product,product_number) VALUES (:id_user, :id_product, :product_number)');
-$select->execute([':id_user' => $_SESSION['user_id'], ':id_product' => $_GET["product"], ':product_number' => $_POST['number']]);
+$select2 = $pdo->prepare('DELETE FROM cart
+                    WHERE id_user = :id_user AND id_product = :id_product');
+$select2->execute([':id_user' => $_SESSION['user_id'], ':id_product' => $_GET["product"]]);
+header('Location: /lapanier.php');
 die();

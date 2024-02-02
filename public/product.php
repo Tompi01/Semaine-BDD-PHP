@@ -2,12 +2,13 @@
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/product.php';
 
+// If the product method is available, then the info is retrieved, otherwise it is redirected to the home page.
 
 if (isset($_GET["product"])) {
     $infos_product = get_product_infos();
 } else {
-    header('Location: /index.php'); // redirige utilisateur
-    die(); // stop execution du script
+    header('Location: /index.php');
+    die();
 }
 // Vérifie si l'utilisateur est connecté
 if (isset($_SESSION["id"])) {
@@ -39,12 +40,13 @@ if (isset($_SESSION["id"])) {
     <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
     <?php require_once __DIR__ . '/../src/partials/show_error.php'; ?>
 
-    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
-        <form action="/actions/modify_product.php?product=<?php echo $_GET["product"] ?>" method="post">
-            <div class="modifsuppr">
-                <button>Modifier le produit</button>
-            </div>
-        </form>
+    
+    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin"): // If you're an admin ?>
+    <form action="/actions/modify_product.php?product=<?php echo $_GET["product"]?>" method="post">
+        <div>
+            <button>Modifier le produit</button>
+        </div>
+    </form>
 
         <form action="/actions/delete_product.php?product=<?php echo $_GET["product"] ?>" method="post">
             <div class="modifsuppr1">
@@ -62,26 +64,35 @@ if (isset($_SESSION["id"])) {
                         <input type="submit" name="submit" value="Ajouter au panier">
                     </form>
                 </div>
-                <div class="product-box">
-                    <h1><?php echo $infos_product["name"] ?></h1>
-                    <p>Catégorie <?php echo $infos_product["category"] ?></p>
-                    <p><i><?php echo $infos_product["description"] ?></i></p>
-                    <h6><?php echo $infos_product["price"] ?>€</h6>
-                    <br><br>
-                    <div class="comment-box">
-                        <h1>Commentaires et avis : </h1>
-                        <form action="/actions/comment.php?product=<?php echo $_GET["product"] ?>" method="post">
+            <div class="product-box">
+            <h1><?php echo $infos_product[0]["name"] ?></h1>
+            <p>Catégorie <?php echo $infos_product[0]["category"] ?></p>
+            <p><i><?php echo $infos_product[0]["description"] ?></i></p>
+            <h6><?php echo $infos_product[0]["price"] ?>€</h6>
+            <br><br>
+            <div class="comment-box">
+                <h1>Commentaires et avis :</h1>
+              <form action="/actions/comment.php?product=<?php echo $_GET["product"] ?>" method="post">
                             <input type="text" name="comment" id="comment" placeholder="Laissez votre commentaire ici">
                             <label for="rating">Votre note</label>
                             <input type="number" name="rating" id="rating" value=5 min=0 max=5>
                             <input type="submit" name="submit_comment" id="submit_comment" value="Envoyer le commentaire">
                         </form>
-                        <?php if (isset($infos_product["rating"])) { ?>
-                            <p><?php echo $infos_product["username"] . " : " .  $infos_product["date"] ?></p>
-                            <p><?php echo "Note: " . $infos_product["rating"] . '/5' ?></p>
-                            <p><?php echo $infos_product["commentary"] ?></p>
-                        <?php } ?>
-
+                <?php foreach($infos_product as $commentary):?>
+                    <?php if (isset($commentary["rating"])) { ?>
+                        <div class="commentary">
+                            <div class="commentary_infos">
+                                <?php $newDate = "Le ".date("j M Y", strtotime($commentary["date"]));?>
+                                <p><?php echo "<b>".$commentary["username"]."</b> : ".  $newDate ?></p>
+                                <p><?php echo "Note: " . $commentary["rating"] . '/5' ?></p>
+                            </div>
+                            <div class="commentary_text">
+                                <marquee direction="right" scrollamount="10"><?php echo $commentary["commentary"] ?></marquee>
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <br>
+                <?php endforeach;?>
                     </div>
                 </div>
             </div>

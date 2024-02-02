@@ -55,6 +55,25 @@ body{
     margin: 0;
 }
 
+
+.commentary {
+    background-color: rgb(168, 213, 255);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+.commentary_text {
+    background-color: rgb(223, 239, 255);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.commentary_infos {
+    display: flex;
+    justify-content:space-between;
+}
+
 .comment-box form {
     margin-top: 20px;
 }
@@ -160,3 +179,4 @@ body{
     transition: background-color 0.3s ease;
     border-radius: 6%;
 }
+

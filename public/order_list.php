@@ -1,23 +1,31 @@
 <?php
 require_once __DIR__ . '/../src/init.php';
 require_once __DIR__ . '/actions/order_list.php';
+
+// Redirects the user to the home page if he doesn't have the get method.
+if (!isset($_SESSION["user_id"])) {
+    header("Location: /index.php");
+    die();
+}
+
+// Define methods well if they are not present to avoid problems
 if (!isset($_POST["search_status"])) {
     $_POST["search_status"] = "all";
 }
-if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {
+
+if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { // We take the commands in a variable, so admin
     var_dump($_POST["search_status"]);
-    // On prends les commandes dans une variable donc admin
     if (!isset($_POST["search_status"])) {
-        // Si y'a pas de filtre sélectionné
+        // If no filter is selected
         $info_orders = get_admin_orders("all");
     } else {
-        // Si y'a un filtre sélectionné
+        // If a filter is selected
         $info_orders = get_admin_orders($_POST["search_status"]);
     }
-} else {
-    $info_orders = get_user_orders();
 
-    // On prends les commandes dans une variable donc user
+
+} else { // We take the commands in a variable, so user
+    $info_orders = get_user_orders();
 }
 ?>
 <!DOCTYPE html>
