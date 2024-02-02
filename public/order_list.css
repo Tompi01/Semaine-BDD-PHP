@@ -1,0 +1,99 @@
+body{
+    background-color: #000000;
+}
+h1{
+    color: #fff;
+    text-align: center;
+}
+h6{
+    color: #000000;
+    background-color: #ddd;
+    border: thick double  #fff7f7;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    animation: fade-in 0.5s ease; /* Animation d'apparition */
+    text-align:left; 
+}
+h6:hover{
+    background-color: #000000;
+    color: #fff;
+}
+
+/* Styles pour la boîte entourant le contenu de la div col */
+.col-container {
+    background-color: #300000;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fade-in 0.5s ease; /* Animation d'apparition */
+}
+
+/* Animation pour l'apparition de la boîte */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles pour le bouton de classe valid */
+input[type="submit"] {
+    background-color: #f9fcff;
+    color: #000000;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+
+/* Animation au survol du bouton */
+input[type="submit"]:hover {
+    background-color: #38b6ff;
+}
+.marque{
+    color: #fff;
+    text-justify: kashida;
+    border: solid #ffffff;
+    border-radius: 15px;
+ 
+}
+
+.quantity{
+    color: #000000;
+    background-color: #ddd;
+    border: thick double  #fff7f7;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    animation: fade-in 0.5s ease; /* Animation d'apparition */
+    text-align:left; 
+}
+.quantity:hover{
+    background-color: #000000;
+    color: #fff;
+}
+
+.trie{
+    margin-left: 1120px;
+    border-radius: 5%;
+}
+.trie1{
+    margin-left: 1120px;
+    margin-bottom: -5%;
+    margin-top: 5%;
+    border-radius: 5%;
+}

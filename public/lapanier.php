@@ -19,6 +19,7 @@ $product_cart = get_display_lapanier();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>panier</title>
+    <link rel="stylesheet" type="text/css" href="/lapanier.css">
 </head>
 
 <body>
@@ -26,6 +27,7 @@ $product_cart = get_display_lapanier();
 
     <h1>Panier</h1>
     <h3>Votre panier-piano</h3>
+    <div class ="liste">
     <ul>
         <?php foreach ($product_cart as $product) : ?> </p>
             <li>
@@ -36,9 +38,12 @@ $product_cart = get_display_lapanier();
             </li>
         <?php endforeach; ?> </p>
     </ul>
+    </div>
+    <div class = "valid">
     <form action="/actions/validate_order.php" method="post">
         <input type="submit" value="Passer la commande" name="validate" id="validate">
     </form>
+    </div>
 
 </body>
 
