@@ -21,7 +21,7 @@ function checkOrderExistence($userId, $productId) {
     global $pdo;
     
     // Préparer la requête SQL pour vérifier si une commande existe
-    $sql = "SELECT COUNT(*) AS count FROM composition 
+    $sql = "SELECT * FROM composition,orders 
             INNER JOIN orders ON composition.id_order = orders.id 
             WHERE orders.id_user = :userId AND composition.id_product = :productId";
     
@@ -39,7 +39,7 @@ function checkOrderExistence($userId, $productId) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
     // Vérifier si une commande existe pour ce produit et cet utilisateur
-    if ($result['count'] > 0) {
+    if ($result > 0) {
         return true;
     } else {
         return false;

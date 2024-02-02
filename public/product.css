@@ -11,6 +11,7 @@ body{
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
+    margin-top: 90px;
     margin-bottom: 20px;
     transition: transform 0.3s ease;
     text-align: center; /* Pour centrer les éléments horizontalement */
@@ -129,8 +130,8 @@ body{
 }
 .ajoutpanier {
     position: fixed; /* Position fixe pour rester en haut */
-    top: 40px; /* Distance du haut de la page */
-    left: 50%; /* Centre horizontalement */
+    top: 60px; /* Distance du haut de la page */
+    left: 15%; /* Centre horizontalement */
     transform: translateX(-50%); /* Pour centrer horizontalement */
     background-color: #423b3b; /* Couleur de fond */
     padding: 15px 30px; /* Espacement intérieur */

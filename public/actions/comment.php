@@ -1,39 +1,26 @@
 <?php
-// Vérifie si le formulaire de commentaire est soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_comment"])) {
-    // Vérifie si l'utilisateur est connecté
-    if (isset($_SESSION["id"])) {
-        // Récupère les données du formulaire
-        $comment = $_POST["comment"];
-        $productId = $_GET["product"];
-        $userId = $_SESSION["id"];
+require_once __DIR__ . '/../../src/init.php';
 
-        // insérer le commentaire
-        $sql = "INSERT INTO commentaries (id_user, id_product, commentary) VALUES (:userId, :productId, :comment)";
-        
-        // Préparer la requête
-        $stmt = $pdo->prepare($sql);
-        
-        // Liaison des paramètres
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-        $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
-        
-        // Exécuter la requête
-        $stmt->execute();
-        
-        // Rediriger vers la page du produit après avoir commenté
-        header("Location: /product.php?product=$productId");
-        exit();
+
+if (isset($_SESSION["user_id"]) && isset($_GET["product"])) {
+
+    // Get the count of the selected product
+    $comment = $pdo->prepare('SELECT count(composition.id_product) as c FROM orders
+                             INNER JOIN composition ON composition.id_order = orders.id
+                             WHERE orders.id_user = ? AND composition.id_product = ?');
+    $comment->execute([$_SESSION["user_id"], $_GET["product"]]);
+    $infos = $comment->fetchAll();
+
+    if ($infos[0]["c"] > 0) {
+        // Insert the commentary in the BDD
+        $comment = $pdo->prepare('INSERT INTO commentaries (id_user,id_product,rating, commentary) VALUES (?,?,?,?)');
+        $comment->execute([$_SESSION['user_id'], $_GET["product"], $_POST["rating"], $_POST["comment"]]);
     } else {
-        // Si l'utilisateur n'est pas connecté, redirigez-le vers la page de connexion ou affichez un message d'erreur
-        header("Location: /login.php");
-        exit();
+        $_SESSION['error_message'] = "Vous n'avez jamais commandé ce produit";
     }
+    header("Location: /product.php?product=" . $_GET['product']);
+    die();
 } else {
-    // Si le formulaire n'est pas soumis, redirigez l'utilisateur vers la page d'accueil ou affichez un message d'erreur
-    header("Location: /index.php");
-    exit();
+    header("Location: /product.php");
+    die();
 }
-
-?>

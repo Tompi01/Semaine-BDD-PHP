@@ -29,7 +29,7 @@
         }
 
         a:hover {
-            background-color: #0056b3;
+            background-color: #38b6ff;
             transform: translateY(-3px);
         }
 
