@@ -12,6 +12,7 @@ require_once __DIR__ . '/../src/init.php';
 <body>
     <?php require_once __DIR__ . '/../src/partials/show_error.php'; ?>
     
+    
     <div class="bulle"> 
     <span style="--i:11;"></span>
     <span style="--i:12;"></span>

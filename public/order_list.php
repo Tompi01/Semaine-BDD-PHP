@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"])) {
 if (!isset($_POST["search_status"])) {
     $_POST["search_status"] = "all";
 }
-if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {// We take the commands in a variable, so admin
+if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { // We take the commands in a variable, so admin
     // On prends les commandes dans une variable donc admin
 
     if (!isset($_POST["search_status"])) {
@@ -28,18 +28,12 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {// We take the co
         sort($info_orders);
     } else {
         // Si y'a un filtre sélectionné
-        if($_POST['date_modif'] == "recently")
-        {
+        if ($_POST['date_modif'] == "recently") {
             sort($info_orders);
         } else {
             rsort($info_orders);
         }
     }
-
-} else {
-    $info_orders = get_user_orders();
-
-
 } else { // We take the commands in a variable, so user
     $info_orders = get_user_orders();
 }
@@ -67,70 +61,72 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {// We take the co
                 </br>
                 </br>
                 <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
-                <form action="" method="post">
-                    <div class ="trie">
-                    <select name="search_status" id="search_status">
-                        <option value="all" selected>Tout</option>
-                        <option value="Préparation">Préparation</option>
-                        <option value="Livraison">Livraison</option>
-                        <option value="Livrée">Livré</option>
-                        <option value="Annulée">Annulé</option>
-                    </select>
-                    <select name="date_modif" id="date_modif">
-                        <option value="recently">Du plus récent au plus ancien</option>
-                        <option value="ancien">Du plus ancien au plus récent</option>
-                    </select>
-                    <input type="submit" name="submit" value="Trier" href="">
-                </form>
+                    <form action="" method="post">
+                        <div class="trie">
+                            <select name="search_status" id="search_status">
+                                <option value="all" selected>Tout</option>
+                                <option value="Préparation">Préparation</option>
+                                <option value="Livraison">Livraison</option>
+                                <option value="Livrée">Livré</option>
+                                <option value="Annulée">Annulé</option>
+                            </select>
+                            <select name="date_modif" id="date_modif">
+                                <option value="recently">Du plus récent au plus ancien</option>
+                                <option value="ancien">Du plus ancien au plus récent</option>
+                            </select>
+                            <input type="submit" name="submit" value="Trier" href="">
+                    </form>
             </div>
+        <?php endif; ?>
+
+        <br>
+        <?php $i = 0;
+        $final_price = 0; ?>
+        <?php foreach ($info_orders as $compo) : ?>
+            <?php if ($i != $compo["id_order"]) :
+                $total_price = total_price($compo['id_order']); ?>
+
+                <div class="marque">
+                    <marquee>Commande n°<?php echo $compo["id_order"] ?></marquee>
+                </div>
+                <h6><?php echo "Date de commande: <b>" . $compo["order_date"] . "</b> | Prix Total : <b>" . $total_price[0][0] . "€</b>"; ?></h6>
+                <?php $i = $compo["id_order"] ?>
+                <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
+                    <h6>Commandé par <b><?php echo $compo["username"] ?></b></h6>
                 <?php endif; ?>
+                <h6>Status <b><?php echo $compo["status"] ?></b></h6>
 
-                <br>
-                <?php $i = 0;
-                $final_price = 0; ?>
-                <?php foreach ($info_orders as $compo) : ?>
-                    <?php if ($i != $compo["id_order"]) :
-                        $total_price = total_price($compo['id_order']); ?>
+                <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
+                    <form action="/actions/change_status.php?id_order=<?php echo $compo['id_order'] ?>" method="post">
+                        <div class="trie1">
+                            <select name="status" id="status">
+                                <option value="Préparation">Préparation</option>
+                                <option value="Livraison">Livraison</option>
+                                <option value="Livrée">Livré</option>
+                                <option value="Annulée">Annulé</option>
+                            </select>
 
-            <div class="marque"><marquee>Commande n°<?php echo $compo["id_order"] ?></marquee></div>
-                        <h6><?php echo "Date de commande: <b>" . $compo["order_date"] . "</b> | Prix Total : <b>" . $total_price[0][0] . "€</b>"; ?></h6>
-                        <?php $i = $compo["id_order"] ?>
-                        <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
-                            <h6>Commandé par <b><?php echo $compo["username"] ?></b></h6>
-                        <?php endif; ?>
-                        <h6>Status <b><?php echo $compo["status"] ?></b></h6>
-
-                        <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") : ?>
-                            <form action="/actions/change_status.php?id_order=<?php echo $compo['id_order'] ?>" method="post">
-                            <div class="trie1">
-                                <select name="status" id="status">
-                                    <option value="Préparation">Préparation</option>
-                                    <option value="Livraison">Livraison</option>
-                                    <option value="Livrée">Livré</option>
-                                    <option value="Annulée">Annulé</option>
-                                </select>
-                            
-                                <input type="submit" name="submit" value="Valider" href="">
-                            </form>
-                            </div>
-                        <?php endif; ?>
-
-                    <?php endif; ?>
-                    <ul>
-                        <div class="quantity"> 
-                        <li>
-                            <p><?php echo $compo["quantity"] . " " . $compo["name"] . " | " . $compo["price"] . "€" . $compo["delivery_address"]; ?></p>
-                        </li>
-                        </div>
-
-                    </ul>
-
-
-
-                <?php endforeach; ?>
-                
-            </div>
+                            <input type="submit" name="submit" value="Valider" href="">
+                    </form>
         </div>
+    <?php endif; ?>
+
+<?php endif; ?>
+<ul>
+    <div class="quantity">
+        <li>
+            <p><?php echo $compo["quantity"] . " " . $compo["name"] . " | " . $compo["price"] . "€" . $compo["delivery_address"]; ?></p>
+        </li>
+    </div>
+
+</ul>
+
+
+
+<?php endforeach; ?>
+
+    </div>
+    </div>
     </div>
 
 </body>

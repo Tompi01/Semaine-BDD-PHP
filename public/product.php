@@ -60,7 +60,7 @@ if (isset($_SESSION["id"])) {
             <div class="col">
                 <div class="ajoutpanier">
                     <form action="/actions/add_to_basket.php?product=<?php echo $_GET["product"] ?> " method='post'>
-                        <input type="number" name="number" min="1" placeholder="Quantité voulue">
+                        <input type="number" name="number" value="1" min="1" placeholder="Quantité voulue">
                         <input type="submit" name="submit" value="Ajouter au panier">
                     </form>
                 </div>

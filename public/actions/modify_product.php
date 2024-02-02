@@ -46,9 +46,9 @@ if (isset($_GET["sucess"])) {
     <form action="<?php echo $redirection;?>" method="post">
         <div>
             <label for="name">Nom</label>
-            <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($infos_product['name']); ?>">
+            <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($infos_product[0]['name']); ?>">
             <label for="description">Description</label>
-            <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($infos_product['description']); ?>">
+            <input type="text" name="description" id="description" value="<?php echo htmlspecialchars($infos_product[0]['description']); ?>">
             <label for="category">Catégorie</label>
             <select name="category" id="category">
                 <option value="a4" selected>A4</option>
@@ -56,9 +56,9 @@ if (isset($_GET["sucess"])) {
                 <option value="a2">A2</option>
             </select>
             <label for="price">Prix</label>
-            <input type="number" name="price" id="price" value="<?php echo htmlspecialchars($infos_product['price']); ?>">
+            <input type="number" name="price" id="price" value="<?php echo htmlspecialchars($infos_product[0]['price']); ?>">
             <label for="stock">Stock</label>
-            <input type="number" name="stock" id="stock" value="<?php echo htmlspecialchars($infos_product['stock']); ?>">
+            <input type="number" name="stock" id="stock" value="<?php echo htmlspecialchars($infos_product[0]['stock']); ?>">
             <button>Modifier le produit</button>
         </div>
     </form>

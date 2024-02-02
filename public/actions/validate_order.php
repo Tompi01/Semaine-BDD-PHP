@@ -13,10 +13,9 @@ if (isset($_POST['address']) && $_POST['address'] != "") {
     $select->execute([':id_user' => $_SESSION['user_id']]);
     $command_validation = $select->fetchAll();
 
-
     $buyable = true;
     foreach ($command_validation as $in_stock) {
-        if (!isset($in_stock[0][9])) {
+        if ($in_stock["stock"]<= $in_stock["product_number"]) {
             $buyable = false;
         }
     }
