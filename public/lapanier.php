@@ -28,7 +28,12 @@ $product_cart = get_display_lapanier();
     <h3>Votre panier-piano</h3>
     <ul>
         <?php foreach ($product_cart as $product) : ?> </p>
-            <li><p><?php echo "<b>".$product["product_number"]."x</b> ".$product["name"]." (".$product["price"]*$product["product_number"]."€)" ?> </p></li>
+            <li>
+                <p><?php echo "<b>".$product["product_number"]."x</b> ".$product["name"]." (".$product["price"]*$product["product_number"]."€)" ?> </p>
+                <form action="/actions/remove_to_cart.php?product=<?php echo $product["id"] ?>" method="post">
+                    <input type="submit" value="Retirer" name="validate" id="validate">
+                </form>
+            </li>
         <?php endforeach; ?> </p>
     </ul>
     <form action="/actions/validate_order.php" method="post">
