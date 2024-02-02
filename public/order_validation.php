@@ -16,17 +16,15 @@ $product_cart = get_display_lapanier();
 <body>
     <?php require_once __DIR__ . '/../src/partials/menu.php'; ?>
 
-    <h1>Panier</h1>
-    <h3>Votre panier-piano</h3>
+    <h1>Dernière étape avant de valider votre commande!</h1>
+    <h3>Veuillez entrer votre adresse de livraison:</h3>
     <!--  mettre le code ici -->
-    <ul>
-        <?php foreach ($product_cart as $product) : ?> </p>
-            <li>
-                <p><?php echo "<b>" . $product["product_number"] . "x</b> " . $product["name"] . " (" . $product["price"] . "€)" ?> </p>
-            </li>
-        <?php endforeach; ?> </p>
-    </ul>
-    <button><a href="order_validation.php">Confirmer la Commande</a></button>
+
+    <form action="/actions/validate_order.php" method="post">
+        <input type="text" name="address" id="address" placeholder="Addresse">
+        <input type="submit" name="submit" value="Valider la commande">
+    </form>
+
 </body>
 
 
