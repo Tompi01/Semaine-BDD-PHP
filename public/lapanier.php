@@ -40,11 +40,8 @@ $product_cart = get_display_lapanier();
     </ul>
     </div>
     <div class = "valid">
-    <form action="/actions/validate_order.php" method="post">
-        <input type="submit" value="Passer la commande" name="validate" id="validate">
-    </form>
+      <button><a href="order_validation.php">Confirmer la Commande</a></button>
     </div>
-
 </body>
 
 
