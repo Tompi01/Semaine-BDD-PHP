@@ -1,0 +1,81 @@
+/* Styles pour la boîte entourant le contenu de la div liste */
+.liste {
+    background-color: #f9f9f9;
+    border: thick double  #fff7f7;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    animation: fade-in 0.5s ease; /* Animation d'apparition */
+    text-align: center; 
+}
+.liste:hover{
+    background-color: #000000;
+    
+}
+.liste p{
+    color: #fffcfc;
+    background-color: #000000;
+    border-radius: 5%;
+
+}
+/* Animation pour l'apparition de la boîte */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.liste:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour le bouton de classe valid */
+.valid {
+    background-color: #ffffff;
+    color: #fff;
+    padding: 10px 20px;
+    border: thick double  #fff7f7; 
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+.valid input[type = "submit"]{
+
+    color: #000000;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    border-radius: 6px;
+   width:  1500px;
+}
+
+/* Animation au survol du bouton */
+.valid:hover {
+    background-color: #000000;
+}
+body{
+
+    background: #000000;
+}
+h1 {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    text-align: center; /* Pour centrer les éléments horizontalement */
+}
+h1:hover{
+    background-color: #000000;
+    color: #fff;
+}
