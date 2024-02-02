@@ -7,7 +7,6 @@ if (!isset($_GET['product'])) {
     header('Location: /product.php?' . $_GET['product']); // redirige utilisateur
     die(); // stop execution du script
 }
-
 echo "eco prout +";
 global $pdo;
 $select = $pdo->prepare('INSERT INTO cart(id_user, id_product,product_number) VALUES (:id_user, :id_product, :product_number)');
