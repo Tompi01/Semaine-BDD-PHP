@@ -12,16 +12,32 @@ if (!isset($_SESSION["user_id"])) {
 if (!isset($_POST["search_status"])) {
     $_POST["search_status"] = "all";
 }
+if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") {// We take the commands in a variable, so admin
+    // On prends les commandes dans une variable donc admin
 
-if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { // We take the commands in a variable, so admin
-    var_dump($_POST["search_status"]);
     if (!isset($_POST["search_status"])) {
-        // If no filter is selected
-        $info_orders = get_admin_orders("all");
+        // Si y'a pas de filtre sélectionné
+        $info_orders = get_admin_orders_status("all");
     } else {
-        // If a filter is selected
-        $info_orders = get_admin_orders($_POST["search_status"]);
+        // Si y'a un filtre sélectionné
+        $info_orders = get_admin_orders_status($_POST["search_status"]);
     }
+
+    if (!isset($_POST["date_modif"])) {
+        // Si y'a pas de filtre sélectionné
+        sort($info_orders);
+    } else {
+        // Si y'a un filtre sélectionné
+        if($_POST['date_modif'] == "recently")
+        {
+            sort($info_orders);
+        } else {
+            rsort($info_orders);
+        }
+    }
+
+} else {
+    $info_orders = get_user_orders();
 
 
 } else { // We take the commands in a variable, so user
@@ -60,6 +76,10 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { // We take the c
                         <option value="Livrée">Livré</option>
                         <option value="Annulée">Annulé</option>
                     </select>
+                    <select name="date_modif" id="date_modif">
+                        <option value="recently">Du plus récent au plus ancien</option>
+                        <option value="ancien">Du plus ancien au plus récent</option>
+                    </select>
                     <input type="submit" name="submit" value="Trier" href="">
                 </form>
             </div>
@@ -71,6 +91,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { // We take the c
                 <?php foreach ($info_orders as $compo) : ?>
                     <?php if ($i != $compo["id_order"]) :
                         $total_price = total_price($compo['id_order']); ?>
+
             <div class="marque"><marquee>Commande n°<?php echo $compo["id_order"] ?></marquee></div>
                         <h6><?php echo "Date de commande: <b>" . $compo["order_date"] . "</b> | Prix Total : <b>" . $total_price[0][0] . "€</b>"; ?></h6>
                         <?php $i = $compo["id_order"] ?>
@@ -107,6 +128,7 @@ if (isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { // We take the c
 
 
                 <?php endforeach; ?>
+                
             </div>
         </div>
     </div>
